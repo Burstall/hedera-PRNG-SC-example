@@ -25,7 +25,7 @@ contract PrngGenerator is PrngSystemContract {
         if (lo >= hi) revert ParamsError("lo / hi");
 
         bytes32 seedBytes = this.getPseudorandomSeed();
-        uint256 choice = bytesToUint(keccak256(abi.encodePacked(block.timestamp, seedBytes, userSeed)));
+        uint256 choice = bytesToUint(keccak256(abi.encodePacked(block.timestamp, seedBytes, userSeed, msg.sender)));
 
     	randNum = lo + (choice % (hi - lo));
         return randNum;
